@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block content %}
+
+  <!--? Team Start -->
+  <div class="team-area section-padding30 ">
+    <div class="container">
+        <div class="row justify-content-sm-center">
+            <div class="cl-xl-7 col-lg-8 col-md-10">
+                <!-- Section Tittle -->
+                <div class="section-tittle text-center mb-70">
+                    <span>Our Products </span>
+                    <h2>Our Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- single Tem -->
+            {% for item in products %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
+                <div class="single-team mb-30">
+                    <div class="team-img">
+                        <img src="{{item.image.url}}" alt="">
+                    </div>
+                    <div class="team-caption">
+                        <span>{{ item.name }}</span>
+                        <h3><a href="#">{{item.pet}}/ {{item.category}}</a></h3>
+                        <p>{{item.description}}</p>
+                        <a href="{%url 'buy_now' item.id %}" class="btn btn-info">Buy Now</a>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container" style="margin: 100px; padding: 10px;border: 1px solid gray;">
+    <div class="row" >
+        <div class="col-md-6">
+            <h2>Hospital Details</h2>
+            <!-- Add hospital details here -->
+            <div class="date-info">
+                <br>
+                <span>{{hospital.first_name}}</span>
+                <br>
+                <p>{{hospital.user_profile.address}}
+                    {{hospital.user_profile.phone}}
+                    {{hospital.user_profile.city}}
+
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Book an Appointment</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

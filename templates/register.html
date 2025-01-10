@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    
+</style>
+
+
+
+<div class="container-xxl py-5 register" id="register">
+    <div class="container">
+        <div class="bg-light rounded p-3">
+            <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                <div class="row g-5 align-items-center">
+                  <!-- <h6 class="text-danger">{{form.error}}</h6>   -->
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="mb-4">
+                            <h1 class="mb-3">SignUp</h1>
+                            <h6 style="color:red;text-align:center;"> {{form.errors}}</h6>
+                            {% for m in messages  %}
+                              
+                            <p class="text-danger">{{m}}</p>
+                            {% endfor %}
+                            <!-- <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p> -->
+                            <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+                            
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% for f in form %}
+
+                                {{f}} <br><br>
+                                  
+                                {% endfor %}
+                            <button type="submit" class="btn btn-dark border-0 w-100 py-3 mt-3">Register</button>
+
+                            </form>
+                        </div>
+                        </div>
+                        <!-- <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a> -->
+                        Have an Account Click<a href="{%url 'SignIn' %}" class="py-3 px-4 text-danger">Here</a>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <img class="img-fluid rounded w-100" src="{% static 'img\logo\logo.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("register").style.display = "block"
+
+    function displayRegisterContainers(){
+        document.getElementById("register").style.display = "block"
+        document.getElementById("login").style.display = "none"
+
+
+    }
+    function displayLoginContainers(){
+        document.getElementById("register").style.display = "none"
+        document.getElementById("login").style.display = "block"
+
+
+    }
+</script>
+
+  
+{% endblock %}

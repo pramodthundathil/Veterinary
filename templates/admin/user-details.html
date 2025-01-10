@@ -1,0 +1,95 @@
+{% extends 'admin/admin_index.html' %}
+{% block content %}
+<style>
+    input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #0a0a0a !important;
+        box-sizing: border-box;
+    }
+    .content{
+        max-width: 800px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        margin: auto;
+        padding: 20px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+        <div class="container mt-5 mb-5">
+   
+            <!-- Button to trigger modal -->
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+              + Add User
+           </button>
+          
+           <br><br>
+           
+               <h2>User List</h2>
+               <table class="table table-striped mt-5">
+                   <thead>
+                       <tr>
+                           <th>Email</th>
+                           <th>First Name</th>
+                           <th>Phone Number</th>
+                           <th>Username</th>
+                           <th>Address</th>
+                           <th>City</th>
+                           <th>Actions</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {% for user in users %}
+                       <tr>
+                           <td>{{ user.email }}</td>
+                           <td>{{ user.first_name }}</td>
+                          
+                           <td>{{ user.user_profile.phone }}</td>
+                           <td>{{ user.username }}</td>
+                           <td>{{ user.user_profile.address }}</td>
+                           <td>{{ user.user_profile.city }}</td>
+                           <td>
+                               <a href="{% url 'user_update' user.id %}" class="btn btn-warning">Edit</a>
+                               <a href="{% url 'user_delete' user.id %}" onclick="return confirm('Are You sure want to delete ??')" class="btn btn-danger">Delete</a>
+                           </td>
+                       </tr>
+                       {% endfor %}
+                   </tbody>
+               </table>
+           </div>
+           <!-- Modal for Adding User -->
+           <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                           <form method="post" >
+                               {% csrf_token %}
+           
+                              {{ form1.as_p }}
+                              {{ form2.as_p }}
+                              <br>
+                               <button type="submit" class="btn btn-primary">Save</button>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

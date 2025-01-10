@@ -1,0 +1,82 @@
+{% extends 'merchant/merchant-index.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+        <div class="container mt-5 mb-5">
+   
+            <!-- Button to trigger modal -->
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+              + Add Products
+           </button>
+           <br><br>
+           
+               <h2> Product List </h2>
+               <table class="table table-striped mt-5">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product description</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Product Category</th>
+                        <th>Pet</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in products %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                       
+                        <td>{{ item.stock }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.pet }}</td>
+                        <td>{{ item.category }}</td>
+                        <td><img src="{{item.image.url }}" width="50px" alt=""> </td>
+                       
+                        <td>
+                            <a href="{% url 'product_update' item.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'product_delete' item.id %}" onclick="return confirm('Are You sure want to delete ??')" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal for Adding User -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Add Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+        
+                           {{ form.as_p }}
+                          
+                           <br>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+
+</div>
+
+
+
+
+{% endblock %}

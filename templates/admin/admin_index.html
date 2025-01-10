@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Petcare</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family:'Times New Roman', Times, serif
+        }
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            transition: width 0.3s;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-align: left;
+            display: block;
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #575d63;
+        }
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar .logo img {
+            width: 100px;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .navbar {
+            margin-left: 250px;
+            transition: margin-left 0.3s;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            outline: none;
+        }
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .navbar {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" style="z-index: 1054;">
+        <div class="logo">
+            <img src="/static/img/logo/logo.png" alt="Petcare Logo">
+        </div>
+        <a href="{%url 'user' %}"><i class="fas fa-users"></i> User Management</a>
+        <a href="{%url 'merchant'%}"><i class="fas fa-store"></i> Merchant Management</a>
+        <a href="{%url 'hospital' %}"><i class="fas fa-hospital"></i> Hospital Management</a>
+        <a href="#grooming"><i class="fas fa-cut"></i> Grooming</a>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i> Admin
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{%url 'SignOut' %}">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% for message in messages %}
+
+    <div class="toast-container position-fixed p-3 " style="right: 0; top:70px;z-index: 2;margin: auto;">
+      <div id="toast-{{ forloop.counter }}" class="toast {{ message.tags }}" role="alert" aria-live="assertive"
+        aria-atomic="true" style="opacity: 1 !important;width:300px !important ;">
+       
+        <div class="toast-body">
+          {{ message }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    {% block content %}
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center mb-3">
+                    <h1 class="display-6">Welcome Admin Dash Board</h1>
+                    <p>You Can Manage Site From Here</p>
+                </div>
+                    <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User Management</h5>
+                            <p class="card-text">Manage all users registered on the platform.</p>
+                            <a href="{%url 'user'%}" class="btn btn-primary">Go to User Management</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Merchant Management</h5>
+                            <p class="card-text">Manage all merchants registered on the platform.</p>
+                            <a href="{%url 'merchant' %}" class="btn btn-primary">Go to Merchant Management</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Hospital Management</h5>
+                            <p class="card-text">Manage all hospitals registered on the platform.</p>
+                            <a href="{%url 'hospital' %}" class="btn btn-primary">Go to Hospital Management</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Grooming</h5>
+                            <p class="card-text">Manage all grooming services registered on the platform.</p>
+                            <a href="#" class="btn btn-primary">Go to Grooming</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Select all alert elements
+          const alerts = document.querySelectorAll('.alert');
+    
+          // Loop through each alert
+          alerts.forEach((alert, index) => {
+            setTimeout(() => {
+              // Add fade-out effect
+              alert.style.transition = 'opacity 0.5s ease';
+              alert.style.opacity = '0';
+              setTimeout(() => {
+                alert.remove(); // Remove the element from the DOM
+              }, 500); // Wait for fade-out to complete
+            }, 3000); // Start fade-out after 3 seconds
+          });
+        });
+        // Display Toast Messages
+        document.addEventListener("DOMContentLoaded", function () {
+          const toasts = document.querySelectorAll('.toast');
+    
+          toasts.forEach(toastEl => {
+            const toast = new bootstrap.Toast(toastEl, { delay: 6000 });
+    
+            // Play a beep sound when the toast is shown
+            toastEl.addEventListener('shown.bs.toast', () => {
+              const context = new (window.AudioContext || window.webkitAudioContext)();
+              const oscillator = context.createOscillator();
+              oscillator.type = 'sine'; // Simple beep sound
+              oscillator.frequency.setValueAtTime(880, context.currentTime); // Frequency in Hz
+              oscillator.connect(context.destination);
+              oscillator.start();
+              setTimeout(() => {
+                oscillator.stop();
+              }, 200); // Play for 200ms
+            });
+    
+            toast.show();
+          });
+        });
+    
+    
+    
+    
+      </script>
+</body>
+</html>

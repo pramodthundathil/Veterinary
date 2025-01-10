@@ -1,0 +1,50 @@
+{% extends 'merchant/merchant-index.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+        <div class="container mt-5 mb-5">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Order Item</th>
+                        <th>Order Date</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Payment Status</th>
+                        <th>Completion Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_item }}</td>
+                        <td>{{ order.order_date }}</td>
+                        <td>{{ order.customer }}</td>
+                        <td class="text-info">
+                            {{order.status}}
+                        </td>
+                        <td>{{ order.payment_status|yesno:"Paid,Unpaid" }}</td>
+                        <td>{{ order.completion_status|yesno:"Completed,Incomplete" }}</td>
+                        <td>
+                            <a href="{%url 'order_status_change' order.id 'pending' %}" class="btn btn-warning">Pending</a>
+                            <a href="{%url 'order_status_change' order.id 'confirmed' %}" class="btn btn-primary">Confirmed</a>
+                            <a href="{%url 'order_status_change' order.id 'shipped' %}" class="btn btn-info">Shipped</a>
+                            <a href="{%url 'order_status_change' order.id 'delivered' %}" class="btn btn-success">Delivered</a>
+                            <a href="{%url 'order_status_change' order.id 'cancelled' %}" class="btn btn-danger">Cancelled</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

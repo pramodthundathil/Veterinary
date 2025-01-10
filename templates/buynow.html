@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container" style="margin-top: 150px !important;">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{product.image.url}}" width="80%" alt="">
+        </div>
+        <div class="col-md-8">
+            <h3>{{product.name}}</h3>
+            <p>{{product.description}}</p>
+            <h1>{{product.price}}</h1>
+            <h4>{{product.pet}}- {{product.category}}</h4>
+
+            <!-- Razorpay button -->
+             <form method="post">
+                {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
