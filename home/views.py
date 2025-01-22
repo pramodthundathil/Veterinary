@@ -527,6 +527,11 @@ def appointment_booking(request):
     return render(request,"hospital/customer_bookings.html",{"appointment":appointment})
 
 
+def grooming_booking(request):
+    appointment = BookAppointment.objects.filter(hospital = request.user, treatment = "Grooming")
+    return render(request,"hospital/grooming_bookings.html",{"appointment":appointment})
+
+
 def vaccination(request):
     form = VaccinationForm()
     vaccinations = Vaccinations.objects.filter(hospital = request.user)

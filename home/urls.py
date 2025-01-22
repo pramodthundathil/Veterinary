@@ -22,6 +22,7 @@ urlpatterns = [
     path("my_pets",views.my_pets,name="my_pets"),
     path("update_pet/<int:pk>",views.update_pet,name="update_pet"),
     path("delete_pet/<int:pk>",views.delete_pet,name="delete_pet"),
+    path("grooming_booking",views.grooming_booking,name="grooming_booking"),
 
     path("user",views.user,name="user"),
     path("user_update/<int:id>",views.user_update,name="user_update"),

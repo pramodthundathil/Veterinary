@@ -77,6 +77,7 @@
         </div>
         <a href="{%url 'appointment_booking' %}"><i class="fas fa-users"></i>Bookings</a>
         <a href="{%url 'vaccination' %}"><i class="fas fa-store"></i>Vaccinations </a>
+        <a href="{%url 'grooming_booking' %}"><i class="fas fa-cut"></i> Grooming</a>
        
     </div>
 
@@ -137,7 +138,15 @@
                         </div>
                     </div>
                 </div>
-                ]
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Grooming</h5>
+                            <p class="card-text">Manage all grooming services registered on the platform.</p>
+                            <a href="{%url 'grooming_booking'%}" class="btn btn-primary">Go to Grooming</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
